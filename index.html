@@ -31,7 +31,10 @@
         <br>
         <div>
          <h3>Filters</h3> 
-          <hideitems> </hideitems>
+          <hideitems hide-completed-value="isHidden"
+                     button-text="buttonText"
+                     toggle-button="toggleButton()"> 
+          </hideitems>
           <button type="submit" class="btn btn-info" ng-click="deleteCompleted()">Clear Completed</button>
          <br>
         </div>

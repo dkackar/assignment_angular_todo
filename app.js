@@ -4,7 +4,8 @@ app.controller('TodoCtrl',
     ["$scope",
     function($scope) {
 
-      $scope.hideCompletedValue = false;
+      $scope.isHidden = false;
+      $scope.buttonText = "Hide Completed";
       
       $scope.item = { text: "Get groceries from the store",
                 dueDate: new Date(),
@@ -45,12 +46,12 @@ app.controller('TodoCtrl',
 
       // $scope.hideCompleted = function(){
         
-      //   $scope.hideCompletedValue = true;
+      //   $scope.isHidden = true;
       // }; 
 
       // $scope.hideCompletedItem = function() {
-      //   console.log("Truthy " + $scope.item.completed && $scope.hideCompletedValue)
-      //   return $scope.item.completed && $scope.hideCompletedValue
+      //   console.log("Truthy " + $scope.item.completed && $scope.isHidden)
+      //   return $scope.item.completed && $scope.isHidden
       // };
 
 
@@ -66,6 +67,21 @@ app.controller('TodoCtrl',
         }
       };
 
+      $scope.toggleButton = function() {
+        // starts with isHidden is false
+        // Hide Completed
+        $scope.isHidden = !$scope.isHidden;
+        // isHidden = true
+        // In that case button text show "Show Hidden"
+
+        if($scope.isHidden == true) {
+          $scope.buttonText = "Show Completed";
+        } else {
+          $scope.buttonText = "Hide Completed";
+        }
+ 
+      };
+
 }]);
 
 app.filter('hideCompletedItem', function () {
@@ -74,7 +90,7 @@ app.filter('hideCompletedItem', function () {
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
 
-      if (!scope.hideCompletedValue || !item.completed ) {
+      if (!scope.isHidden || !item.completed ) {
         filtered.push(item);
       }
     }
@@ -88,26 +104,14 @@ app.directive('hideitems', function() {
   return {
     restrict: 'E',
     
-    scope: {},
+    scope: {
+      isHidden: "=",
+      buttonText: "=",
+      toggleButton: '&'
+    },
     
     templateUrl: 'hideitems.html',
 
-    link: function(scope, element, attrs) {
-      
-      scope.buttonText = "Hide Completed",
-      scope.hideCompletedValue = false,
-      
-      scope.toggleButton = function() {
-        if(scope.hideCompletedValue == true) {
-          scope.buttonText = "Show Completed";
-          scope.hideCompletedValue = false;
-        } else {
-          scope.buttonText = "Hide Completed";
-          scope.hideCompletedValue = true;
-        }
-        //console.log("After " + scope.hideCompletedValue);
-      };
-    },
   };
 
 });
