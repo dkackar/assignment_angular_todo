@@ -43,10 +43,10 @@ app.controller('TodoCtrl',
         $scope.items.splice($scope.items.indexOf(item),1);
       };
 
-      $scope.hideCompleted = function(){
+      // $scope.hideCompleted = function(){
         
-        $scope.hideCompletedValue = true;
-      }; 
+      //   $scope.hideCompletedValue = true;
+      // }; 
 
       // $scope.hideCompletedItem = function() {
       //   console.log("Truthy " + $scope.item.completed && $scope.hideCompletedValue)
@@ -55,9 +55,15 @@ app.controller('TodoCtrl',
 
 
       $scope.deleteCompleted = function() {
-        $scope.items.forEach(function() {
+        // $scope.items.forEach(function(item) {
             
-        });
+        // });
+        len = $scope.items.length - 1;
+        for (var i = len; i >= 0; i--) {
+          if ($scope.items[i].completed == true) {
+             $scope.items.splice(i,1)
+          }
+        }
       };
 
 }]);
@@ -65,8 +71,6 @@ app.controller('TodoCtrl',
 app.filter('hideCompletedItem', function () {
   return function(items,scope) {
     var filtered = [];
-
-    console.log("Scope is : " + scope)
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
 
@@ -74,19 +78,25 @@ app.filter('hideCompletedItem', function () {
         filtered.push(item);
       }
     }
+
     return filtered;
+  };
+});
 
-   };
+app.directive('hideitems', function() {
 
-app.directive('installApp', function() {
   return {
     restrict: 'E',
-    scope: {},
-    templateUrl: 'installApp.html',
     
+    scope: {},
+    
+    templateUrl: 'hideitems.html',
+
     link: function(scope, element, attrs) {
+      
       scope.buttonText = "Hide Completed",
-      scope.hideCompletedValue = true,
+      scope.hideCompletedValue = false,
+      
       scope.toggleButton = function() {
         if(scope.hideCompletedValue == true) {
           scope.buttonText = "Show Completed";
@@ -95,11 +105,9 @@ app.directive('installApp', function() {
           scope.buttonText = "Hide Completed";
           scope.hideCompletedValue = true;
         }
-      }
+        //console.log("After " + scope.hideCompletedValue);
+      };
     },
   };
-
-
-});
 
 });
