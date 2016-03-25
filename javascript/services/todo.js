@@ -20,6 +20,17 @@ app.factory('todoService', [function(){
         },
   ];
 
+  // obj.filters = [{name: 'None', value: ''},
+  //             {name: 'Completed on Top', value: "-completed"},
+  //             {name: 'Completed on Bottom', value: "completed"},
+  //             {name: 'Due Date Ascending', value: 'dueDate'},
+  //             {name: 'Due Date Descending', value: '-dueDate'}
+  //             ];
+  
+  // obj.getFilters = function(){
+  //   return obj.filters;
+  // };
+
   obj.allItems = function(){
     return _items;
   };

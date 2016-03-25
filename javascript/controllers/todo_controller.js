@@ -2,6 +2,8 @@ app.controller('TodoCtrl',
     ["$scope", "todoService", function($scope,todoService) {
 
       $scope.isHidden = false;
+      $scope.sortby = "";
+
       $scope.buttonText = "Hide Completed";
       $scope.items = todoService.allItems();
       
