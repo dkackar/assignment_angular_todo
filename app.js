@@ -1,68 +1,46 @@
 var app = angular.module('TodoApp', []);
 
 app.controller('TodoCtrl',
-    ["$scope",
-    function($scope) {
+    ["$scope", 'todoService',
+    function($scope, todoService) {
 
       $scope.isHidden = false;
       $scope.buttonText = "Hide Completed";
+      $scope.items = todoService.allItems();
       
       $scope.item = { text: "Get groceries from the store",
                 dueDate: new Date(),
-                completed: false };
-      $scope.items = [
-         {
-          text: "Goto school",
-          dueDate: new Date(),
-          completed: false 
-         },
-         {
-          text: "Prepare lunch",
-          dueDate: new Date(),
-          completed: false 
-         },
-         {
-          text: "Dentist Appointment",
-          dueDate: new Date(),
-          completed: false 
-        },
-      ];
+                completed: false
+      };
 
       $scope.createTodo = function(){
-        var newObj = {};
-        newObj.text = $scope.item.text;
-        newObj.dueDate = $scope.item.dueDate;
-        newObj.completed = $scope.item.completed;
+        // var newObj = {};
+        // newObj.text = $scope.item.text;
+        // newObj.dueDate = $scope.item.dueDate;
+        // newObj.completed = $scope.item.completed;
         alert("Todo has been created.");
-        $scope.items.push(newObj);
+
+        todoService.addItem(item);
+        //$scope.items.push(newObj);
         $scope.item.text = "";
         $scope.item.dueDate = "";
         $scope.item.completed = "";
       };
 
       $scope.deleteTodo = function(item){
-        $scope.items.splice($scope.items.indexOf(item),1);
+        todoService.deleteTodo(item);
+        //$scope.items.splice($scope.items.indexOf(item),1);
       };
-
-      // $scope.hideCompleted = function(){
-        
-      //   $scope.isHidden = true;
-      // }; 
-
-      // $scope.hideCompletedItem = function() {
-      //   console.log("Truthy " + $scope.item.completed && $scope.isHidden)
-      //   return $scope.item.completed && $scope.isHidden
-      // };
-
 
       $scope.deleteCompleted = function() {
         // $scope.items.forEach(function(item) {
             
         // });
+   
         len = $scope.items.length - 1;
         for (var i = len; i >= 0; i--) {
           if ($scope.items[i].completed == true) {
-             $scope.items.splice(i,1)
+             $scope.items.splice(i,1);
           }
         }
       };
@@ -94,7 +72,6 @@ app.filter('hideCompletedItem', function () {
         filtered.push(item);
       }
     }
-
     return filtered;
   };
 });
@@ -122,5 +99,45 @@ app.directive('todoitem', function(){
     }, 
     templateUrl:'todoitem.html'
   };
+});
+
+app.factory('todoService', function(){
+
+  var obj = {};
+
+  _items = [
+         {
+          text: "Goto school",
+          dueDate: new Date(),
+          completed: false 
+         },
+         {
+          text: "Prepare lunch",
+          dueDate: new Date(),
+          completed: false 
+         },
+         {
+          text: "Dentist Appointment",
+          dueDate: new Date(),
+          completed: false 
+        },
+  ];
+
+  obj.allItems = function(){
+    return _items;
+  },
+
+  obj.get = function(i){
+    return _item[i];
+  },
+
+  obj.delete = function(item){
+   _item.splice(indexOf(item),1);
+  },
+
+  obj.addTodo = function(item){
+    _items.push(item);
+  }
+
 });
 
