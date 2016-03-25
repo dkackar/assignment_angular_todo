@@ -49,13 +49,7 @@
             </thead>
           </tr>
           <br>
-          <tr ng-repeat="item in items | hideCompletedItem:this">
-            <td>{{item.text}}</td>
-            <td>{{item.dueDate | date:'yyyy-MM-dd'}}</td>
-            <td>
-              <input type="checkbox" ng-model="item.completed">
-            </td>
-            <td ng-click="deleteTodo(item)"><a href="#" >X</a></td>
+          <tr ng-repeat="item in items | hideCompletedItem:this" todoitem="item" delete-todo="deleteTodo()">
           </tr>
         </table>  
       </div>

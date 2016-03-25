@@ -100,7 +100,6 @@ app.filter('hideCompletedItem', function () {
 });
 
 app.directive('hideitems', function() {
-
   return {
     restrict: 'E',
     
@@ -109,9 +108,19 @@ app.directive('hideitems', function() {
       buttonText: "=",
       toggleButton: '&'
     },
-    
-    templateUrl: 'hideitems.html',
-
+    templateUrl: 'hideitems.html'
   };
-
 });
+
+app.directive('todoitem', function(){
+  return{
+    restrict: 'A', 
+
+    scope: {
+      todoitem: "=",
+      deleteTodo: '&'
+    }, 
+    templateUrl:'todoitem.html'
+  };
+});
+
