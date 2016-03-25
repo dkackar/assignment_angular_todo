@@ -23,4 +23,16 @@ app.controller('TodoCtrl',
           completed: false 
         },
       ];
+
+      $scope.createTodo = function(){
+        var newObj = {};
+        newObj.text = $scope.item.text;
+        newObj.dueDate = $scope.item.dueDate;
+        newObj.completed = $scope.item.completed;
+        alert("Todo has been created.");
+        $scope.items.push(newObj);
+        $scope.item.text = "";
+        $scope.item.dueDate = "";
+        $scope.item.completed = "";
+      };
 }]);

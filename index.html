@@ -2,7 +2,6 @@
 <html>
   <head>
     <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/main.css" rel="stylesheet" />
 
     <!-- Include the AngularJS library -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
@@ -24,7 +23,7 @@
           </div>
           <div class="form-group">
             <label >Due Date</label>
-            <input type="text" ng-model="text.dueDate" class="form-control">
+            <input type="text" ng-model="item.dueDate" class="form-control">
           </div>
           <div class="form-group">
             <label>Completed</label>
@@ -34,7 +33,15 @@
         </form>
 
 
-        <table>
+        <table class="table">
+          <tr>
+            <thead>
+              <th>Name</th>
+              <th>Due</th>
+              <th>Completed</th>
+            </thead>
+          </tr>
+          <br>
           <tr ng-repeat="item in items">
             <td>{{item.text}}</td>
             <td>{{item.dueDate | date:'yyyy-MM-dd'}}</td>
