@@ -77,4 +77,29 @@ app.filter('hideCompletedItem', function () {
     return filtered;
 
    };
+
+app.directive('installApp', function() {
+  return {
+    restrict: 'E',
+    scope: {},
+    templateUrl: 'installApp.html',
+    
+    link: function(scope, element, attrs) {
+      scope.buttonText = "Hide Completed",
+      scope.hideCompletedValue = true,
+      scope.toggleButton = function() {
+        if(scope.hideCompletedValue == true) {
+          scope.buttonText = "Show Completed";
+          scope.hideCompletedValue = false;
+        } else {
+          scope.buttonText = "Hide Completed";
+          scope.hideCompletedValue = true;
+        }
+      }
+    },
+  };
+
+
+});
+
 });
