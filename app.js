@@ -15,7 +15,7 @@ app.controller('TodoCtrl',
          {
           text: "Prepare lunch",
           dueDate: new Date(),
-          completed: true 
+          completed: false 
          },
          {
           text: "Dentist Appointment",
@@ -35,4 +35,8 @@ app.controller('TodoCtrl',
         $scope.item.dueDate = "";
         $scope.item.completed = "";
       };
+
+      $scope.deleteTodo = function(item){
+        $scope.items.splice($scope.items.indexOf(item),1);
+      }
 }]);
