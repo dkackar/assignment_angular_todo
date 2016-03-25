@@ -3,6 +3,9 @@ var app = angular.module('TodoApp', []);
 app.controller('TodoCtrl',
     ["$scope",
     function($scope) {
+
+      $scope.hideCompletedValue = false;
+      
       $scope.item = { text: "Get groceries from the store",
                 dueDate: new Date(),
                 completed: false };
@@ -38,5 +41,40 @@ app.controller('TodoCtrl',
 
       $scope.deleteTodo = function(item){
         $scope.items.splice($scope.items.indexOf(item),1);
-      }
+      };
+
+      $scope.hideCompleted = function(){
+        
+        $scope.hideCompletedValue = true;
+      }; 
+
+      // $scope.hideCompletedItem = function() {
+      //   console.log("Truthy " + $scope.item.completed && $scope.hideCompletedValue)
+      //   return $scope.item.completed && $scope.hideCompletedValue
+      // };
+
+
+      $scope.deleteCompleted = function() {
+        $scope.items.forEach(function() {
+            
+        });
+      };
+
 }]);
+
+app.filter('hideCompletedItem', function () {
+  return function(items,scope) {
+    var filtered = [];
+
+    console.log("Scope is : " + scope)
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+
+      if (!scope.hideCompletedValue || !item.completed ) {
+        filtered.push(item);
+      }
+    }
+    return filtered;
+
+   };
+});

@@ -27,7 +27,15 @@
           </div>
           <input type="submit" value="Create Todo" class="btn btn-success">
         </form>
-
+ 
+        <br>
+        <div>
+         <h3>Filters</h3> 
+         <button type="submit" class="btn btn-info" 
+                 ng-click="hideCompleted()">Hide Completed</button>
+         <button type="submit" class="btn btn-info" ng-click="clearAll()">Clear Completed</button>
+         <br>
+        </div>
 
         <table class="table">
           <tr>
@@ -39,11 +47,11 @@
             </thead>
           </tr>
           <br>
-          <tr ng-repeat="item in items">
+          <tr ng-repeat="item in items | hideCompletedItem:this">
             <td>{{item.text}}</td>
             <td>{{item.dueDate | date:'yyyy-MM-dd'}}</td>
             <td>
-              <input type="checkbox"  ng-model="item.completed" ng-true-value="true" ng-false-value="false">
+              <input type="checkbox" ng-model="item.completed">
             </td>
             <td ng-click="deleteTodo(item)"><a href="#" >X</a></td>
           </tr>
